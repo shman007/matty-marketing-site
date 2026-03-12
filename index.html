@@ -6,6 +6,16 @@
   <title>Matty Marketing | Full-Service Email Marketing</title>
   <meta name="description" content="Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.">
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="Matty Marketing | Full-Service Email Marketing">
+  <meta property="og:description" content="Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="headshot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Matty Marketing | Full-Service Email Marketing">
+  <meta name="twitter:description" content="Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -48,6 +58,7 @@
       --black: #333333;
       --purple: #A084CA;
       --purple-hover: #8a6db5;
+      --purple-light: rgba(160, 132, 202, 0.08);
       --green: #D0CF8B;
       --grey: #999999;
       --light-grey: #e5e0d5;
@@ -67,8 +78,34 @@
       overflow-x: hidden;
     }
 
+    /* Page load fade-in */
+    body { opacity: 0; animation: pageLoad 0.6s ease 0.1s forwards; }
+    @keyframes pageLoad { to { opacity: 1; } }
+
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
+
+    /* Skip nav for accessibility */
+    .skip-nav {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--purple);
+      color: var(--white);
+      padding: 12px 24px;
+      border-radius: 0 0 8px 8px;
+      font-size: 0.85rem;
+      z-index: 200;
+      transition: top 0.3s;
+    }
+    .skip-nav:focus { top: 0; }
+
+    /* Focus styles */
+    *:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 3px;
+    }
 
     /* ===== TOP BAR ===== */
     .topbar {
@@ -89,6 +126,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       padding: 14px 40px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.04);
     }
 
     .topbar-logo img {
@@ -109,9 +147,25 @@
       color: var(--grey);
       letter-spacing: 0.03em;
       transition: color 0.2s;
+      position: relative;
     }
 
     .topbar-link:hover { color: var(--black); }
+
+    .topbar-link.active {
+      color: var(--black);
+    }
+
+    .topbar-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: var(--purple);
+      border-radius: 1px;
+    }
 
     .topbar-cta {
       font-family: var(--font-body);
@@ -186,6 +240,7 @@
     .hero-cta:hover {
       background: var(--purple-hover);
       transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
     }
 
     .hero-scroll {
@@ -222,13 +277,6 @@
       margin: 0 auto;
     }
 
-    .section-divider {
-      width: 60px;
-      height: 1px;
-      background: var(--light-grey);
-      margin: 0 auto 60px;
-    }
-
     /* ===== SERVICES ===== */
     .services {
       text-align: center;
@@ -260,17 +308,29 @@
     }
 
     .service-item {
-      padding: 48px 0;
+      padding: 48px 24px;
       border-top: 1px solid var(--light-grey);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
       text-align: left;
       align-items: center;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+      margin: 0 -24px;
     }
 
     .service-item:last-child {
       border-bottom: 1px solid var(--light-grey);
+    }
+
+    .service-item:hover {
+      background: var(--purple-light);
+      border-color: transparent;
+    }
+
+    .service-item:hover + .service-item {
+      border-top-color: transparent;
     }
 
     .service-name {
@@ -278,6 +338,11 @@
       font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 500;
       letter-spacing: -0.01em;
+      transition: color 0.3s;
+    }
+
+    .service-item:hover .service-name {
+      color: var(--purple);
     }
 
     .service-desc {
@@ -304,13 +369,19 @@
 
     .about-image {
       position: relative;
+      overflow: hidden;
+      border-radius: 4px;
     }
 
     .about-image img {
       width: 100%;
-      border-radius: 4px;
       aspect-ratio: 3/4;
       object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.03);
     }
 
     .about-text .about-eyebrow {
@@ -433,32 +504,33 @@
 
     .testimonial-slider {
       position: relative;
-      min-height: 300px;
     }
 
     .testimonial {
+      display: none;
       opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      transform: translateY(20px);
-      pointer-events: none;
+      transition: opacity 0.6s ease;
     }
 
     .testimonial.active {
+      display: block;
       opacity: 1;
-      position: relative;
-      transform: translateY(0);
-      pointer-events: auto;
+    }
+
+    .testimonial-quote {
+      font-size: 3rem;
+      color: var(--purple);
+      font-family: Georgia, serif;
+      line-height: 1;
+      margin-bottom: 24px;
+      opacity: 0.4;
     }
 
     .testimonial-text {
       font-family: var(--font-heading);
-      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
       font-weight: 400;
-      line-height: 1.8;
+      line-height: 1.85;
       color: var(--black);
       margin-bottom: 32px;
       font-style: italic;
@@ -524,6 +596,14 @@
     .slider-dot.active {
       background: var(--purple);
       transform: scale(1.2);
+    }
+
+    .slider-counter {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--grey);
+      margin-top: 20px;
     }
 
     /* ===== CONTACT ===== */
@@ -680,16 +760,38 @@
       cursor: pointer;
       transition: all 0.25s ease;
       margin-top: 16px;
+      position: relative;
     }
 
     .form-submit:hover {
       background: var(--purple-hover);
       transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
     }
 
     .form-success {
       display: none;
       padding: 60px 0;
+      text-align: center;
+    }
+
+    .form-success-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(208, 207, 139, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.5rem;
     }
 
     .form-success h3 {
@@ -705,10 +807,57 @@
       color: var(--grey);
     }
 
+    /* ===== BACK TO TOP ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--light-grey);
+      color: var(--grey);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      transform: translateY(-2px);
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+    }
+
     /* ===== FOOTER ===== */
     .footer {
-      padding: 40px;
+      padding: 60px 40px 40px;
       text-align: center;
+    }
+
+    .footer-logo {
+      margin: 0 auto 20px;
+      height: 28px;
+      opacity: 0.4;
+    }
+
+    .footer-text {
       font-size: 0.75rem;
       font-weight: 300;
       color: var(--grey);
@@ -750,7 +899,8 @@
       border: none;
       cursor: pointer;
       padding: 8px;
-      z-index: 101;
+      z-index: 201;
+      position: relative;
     }
 
     .mobile-toggle span {
@@ -759,7 +909,62 @@
       height: 1.5px;
       background: var(--black);
       margin: 6px 0;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+
+    .mobile-toggle.active span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg);
+    }
+
+    .mobile-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-toggle.active span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg);
+    }
+
+    /* ===== MOBILE OVERLAY ===== */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--cream);
+      z-index: 150;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 36px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .mobile-overlay a {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: color 0.2s;
+    }
+
+    .mobile-overlay a:hover {
+      color: var(--purple);
+    }
+
+    .mobile-overlay .topbar-cta {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      padding: 14px 36px;
+      margin-top: 12px;
     }
 
     /* ===== RESPONSIVE ===== */
@@ -767,28 +972,8 @@
       .topbar { padding: 16px 24px; }
       .topbar.scrolled { padding: 12px 24px; }
 
-      .topbar-right .topbar-link { display: none; }
+      .topbar-right { display: none; }
       .mobile-toggle { display: block; }
-
-      .topbar-right.open {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: var(--cream);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 32px;
-        z-index: 100;
-      }
-
-      .topbar-right.open .topbar-link {
-        display: block;
-        font-size: 1.5rem;
-      }
 
       .hero { padding: 120px 24px 80px; min-height: 90vh; }
       .section { padding: 100px 24px; }
@@ -796,7 +981,8 @@
       .service-item {
         grid-template-columns: 1fr;
         gap: 16px;
-        padding: 36px 0;
+        padding: 36px 16px;
+        margin: 0 -16px;
       }
 
       .about-section { padding: 100px 24px; }
@@ -805,7 +991,9 @@
         gap: 48px;
       }
 
-      .about-image { max-width: 400px; }
+      .about-image {
+        max-width: 400px;
+      }
 
       .results-section { padding: 100px 24px; }
       .results-grid {
@@ -815,21 +1003,38 @@
 
       .testimonials-section { padding: 100px 24px; }
 
+      .slider-dots { gap: 8px; }
+      .slider-btn { width: 40px; height: 40px; }
+      .slider-controls { gap: 20px; }
+
       .contact-section { padding: 100px 24px; }
       .contact-inner {
         grid-template-columns: 1fr;
         gap: 60px;
       }
+
+      .footer { padding: 48px 24px 32px; }
+      .back-to-top { bottom: 20px; right: 20px; }
     }
 
     @media (max-width: 600px) {
       .hero-title { font-size: 2.5rem; }
       .results-grid { grid-template-columns: 1fr; gap: 48px; }
       .result-number { font-size: 3rem; }
+      .slider-dots { display: none; }
+      .slider-counter { display: block; }
+      .form-submit { width: 100%; }
+    }
+
+    @media (min-width: 601px) {
+      .slider-counter { display: none; }
     }
   </style>
 </head>
 <body>
+
+  <!-- Skip Nav -->
+  <a href="#services" class="skip-nav">Skip to content</a>
 
   <!-- TOP BAR -->
   <nav class="topbar" id="topbar">
@@ -837,21 +1042,30 @@
       <img src="logo-small.jpg" alt="Matty Marketing">
     </a>
     <div class="topbar-right" id="topbarRight">
-      <a href="#services" class="topbar-link">Services</a>
-      <a href="#about" class="topbar-link">About</a>
-      <a href="#results" class="topbar-link">Results</a>
-      <a href="#testimonials" class="topbar-link">Testimonials</a>
+      <a href="#services" class="topbar-link" data-section="services">Services</a>
+      <a href="#about" class="topbar-link" data-section="about">About</a>
+      <a href="#results" class="topbar-link" data-section="results">Results</a>
+      <a href="#testimonials" class="topbar-link" data-section="testimonials">Testimonials</a>
       <a href="#contact" class="topbar-cta">Get In Touch</a>
     </div>
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </nav>
 
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#results">Results</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact" class="topbar-cta">Get In Touch</a>
+  </div>
+
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <p class="hero-eyebrow reveal">Matty Marketing</p>
     <h1 class="hero-title reveal reveal-delay-1">From strategy<br>to send.</h1>
     <p class="hero-subtitle reveal reveal-delay-2">Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.</p>
@@ -885,7 +1099,7 @@
   <section class="about-section" id="about">
     <div class="about-inner">
       <div class="about-image reveal">
-        <img src="headshot.jpg" alt="Amanda McLaughlin, founder of Matty Marketing">
+        <img src="headshot.jpg" alt="Amanda McLaughlin, founder of Matty Marketing" loading="lazy">
       </div>
       <div class="about-text">
         <p class="about-eyebrow reveal">About</p>
@@ -930,42 +1144,50 @@
 
       <div class="testimonial-slider reveal" id="testimonialSlider">
         <div class="testimonial active" data-slide="0">
-          <p class="testimonial-text">"Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!"</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!</p>
           <p class="testimonial-author">Jonather Warner, Optimatic</p>
         </div>
 
         <div class="testimonial" data-slide="1">
-          <p class="testimonial-text">"Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough."</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough.</p>
           <p class="testimonial-author">Mark Quinn, Perfectly Snug</p>
         </div>
 
         <div class="testimonial" data-slide="2">
-          <p class="testimonial-text">"Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team."</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team.</p>
           <p class="testimonial-author">Nicole Vincze and Tyler Clemmer, Rec Fitness Owners</p>
         </div>
 
         <div class="testimonial" data-slide="3">
-          <p class="testimonial-text">"We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way."</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way.</p>
           <p class="testimonial-author">Mika Sirett, Rec Fitness Manager</p>
         </div>
 
         <div class="testimonial" data-slide="4">
-          <p class="testimonial-text">"Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly."</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly.</p>
           <p class="testimonial-author">Luigi Coccaro, Franco's Liquor Store</p>
         </div>
 
         <div class="testimonial" data-slide="5">
-          <p class="testimonial-text">"We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers."</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers.</p>
           <p class="testimonial-author">Jesse East, YLW Realtors</p>
         </div>
 
         <div class="testimonial" data-slide="6">
-          <p class="testimonial-text">"Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!"</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!</p>
           <p class="testimonial-author">Mikayla Pankratz-Oranchuk, MIK Marketing</p>
         </div>
 
         <div class="testimonial" data-slide="7">
-          <p class="testimonial-text">"Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!"</p>
+          <div class="testimonial-quote">"</div>
+          <p class="testimonial-text">Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!</p>
           <p class="testimonial-author">Greg Johnson, Voltscore</p>
         </div>
       </div>
@@ -988,6 +1210,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
         </button>
       </div>
+      <p class="slider-counter" id="sliderCounter">1 / 8</p>
     </div>
   </section>
 
@@ -1023,9 +1246,10 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
           </div>
-          <button type="submit" class="form-submit">Send Message</button>
+          <button type="submit" class="form-submit" id="formSubmitBtn">Send Message</button>
         </form>
         <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">✓</div>
           <h3>Thank you.</h3>
           <p>I'll get back to you within 24 hours.</p>
         </div>
@@ -1033,28 +1257,67 @@
     </div>
   </section>
 
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" /></svg>
+  </button>
+
   <!-- FOOTER -->
   <footer class="footer">
-    <p>&copy; 2026 Matty Marketing &nbsp;&middot;&nbsp; Kelowna, BC &nbsp;&middot;&nbsp; <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></p>
+    <img src="logo-small.jpg" alt="Matty Marketing" class="footer-logo">
+    <p class="footer-text">&copy; 2026 Matty Marketing &nbsp;&middot;&nbsp; Kelowna, BC &nbsp;&middot;&nbsp; <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></p>
   </footer>
 
   <script>
-    // Topbar scroll effect
+    // Topbar scroll effect + active section highlighting
     const topbar = document.getElementById('topbar');
-    window.addEventListener('scroll', () => {
-      topbar.classList.toggle('scrolled', window.scrollY > 60);
+    const navLinks = document.querySelectorAll('.topbar-link[data-section]');
+    const sections = document.querySelectorAll('section[id]');
+    const backToTop = document.getElementById('backToTop');
+
+    function updateNav() {
+      const scrollY = window.scrollY;
+      topbar.classList.toggle('scrolled', scrollY > 60);
+      backToTop.classList.toggle('visible', scrollY > 600);
+
+      // Active section highlighting
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 200;
+        if (scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.section === current);
+      });
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // Back to top
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Mobile nav
     const mobileToggle = document.getElementById('mobileToggle');
-    const topbarRight = document.getElementById('topbarRight');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
     mobileToggle.addEventListener('click', () => {
-      topbarRight.classList.toggle('open');
+      const isOpen = mobileOverlay.classList.toggle('open');
+      mobileToggle.classList.toggle('active');
+      mobileToggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     // Close mobile nav on link click
-    topbarRight.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => topbarRight.classList.remove('open'));
+    mobileOverlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileOverlay.classList.remove('open');
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
     });
 
     // Scroll reveal
@@ -1078,23 +1341,18 @@
       const suffix = text.match(/[^0-9%]*$/)[0];
       const numStr = text.replace(prefix, '').replace(suffix, '').replace(/,/g, '');
       const hasPercent = numStr.includes('%');
-      const cleanNum = parseFloat(numStr.replace('%', '').replace('–', ''));
       const dashPart = numStr.includes('–') ? numStr.split('–')[0] + '–' : '';
-      const targetNum = numStr.includes('–') ? parseFloat(numStr.split('–')[1]) : cleanNum;
-      const isDecimal = numStr.includes('.');
+      const targetNum = numStr.includes('–') ? parseFloat(numStr.split('–')[1]) : parseFloat(numStr.replace('%', ''));
       const duration = 2000;
       const steps = 60;
-      const increment = targetNum / steps;
-      let current = 0;
       let step = 0;
 
       const timer = setInterval(() => {
         step++;
-        current = Math.min(targetNum, (targetNum * (1 - Math.pow(1 - step / steps, 3))));
-        let display = isDecimal ? current.toFixed(0) : Math.floor(current);
-        if (targetNum >= 1000) {
-          display = Math.floor(current).toLocaleString();
-        }
+        const progress = 1 - Math.pow(1 - step / steps, 3);
+        const current = Math.min(targetNum, targetNum * progress);
+        let display = Math.floor(current);
+        if (targetNum >= 1000) display = Math.floor(current).toLocaleString();
         el.textContent = prefix + dashPart + display + (hasPercent ? '%' : '') + suffix;
         if (step >= steps) {
           el.textContent = text;
@@ -1122,6 +1380,7 @@
     const dots = document.querySelectorAll('.slider-dot');
     const prevBtn = document.getElementById('sliderPrev');
     const nextBtn = document.getElementById('sliderNext');
+    const counter = document.getElementById('sliderCounter');
     let currentSlide = 0;
     let autoplayTimer;
 
@@ -1131,6 +1390,7 @@
       currentSlide = (n + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
+      if (counter) counter.textContent = (currentSlide + 1) + ' / ' + slides.length;
       resetAutoplay();
     }
 
@@ -1138,6 +1398,16 @@
     nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
     dots.forEach(dot => {
       dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.dot)));
+    });
+
+    // Keyboard navigation for slider
+    document.addEventListener('keydown', (e) => {
+      const slider = document.getElementById('testimonialSlider');
+      const rect = slider.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
     });
 
     // Autoplay every 6 seconds
@@ -1160,11 +1430,15 @@
       if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
     }, { passive: true });
 
-    // Form submission
+    // Form submission with loading state
     const form = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
+    const submitBtn = document.getElementById('formSubmitBtn');
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
       const data = new FormData(form);
       try {
         const res = await fetch(form.action, {
@@ -1175,8 +1449,14 @@
         if (res.ok) {
           form.style.display = 'none';
           success.style.display = 'block';
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Message';
+          alert('Something went wrong. Please try again or email directly.');
         }
       } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
         const name = data.get('name');
         const email = data.get('email');
         const message = data.get('message');
