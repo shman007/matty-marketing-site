@@ -609,20 +609,6 @@
       line-height: 1.9;
       color: var(--black);
       margin-bottom: 28px;
-      max-height: 200px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .testimonial-text.clamped::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      background: linear-gradient(transparent, rgba(251, 244, 232, 0.95));
-      pointer-events: none;
     }
 
     .testimonial-author {
@@ -1207,9 +1193,8 @@
         gap: 40px;
       }
 
-      .testimonials-section { padding: 60px 20px; min-height: 500px; }
+      .testimonials-section { padding: 60px 20px; min-height: auto; }
       .testimonial-card { padding: 40px 28px 36px; }
-      .testimonial-text { max-height: 180px; }
 
       .slider-btn { width: 40px; height: 40px; }
       .slider-nav { gap: 24px; }
@@ -1658,21 +1643,12 @@
     let currentSlide = 0;
     let autoplayTimer;
 
-    function clampText() {
-      document.querySelectorAll('.testimonial-text').forEach(el => {
-        el.classList.toggle('clamped', el.scrollHeight > el.clientHeight);
-      });
-    }
-    clampText();
-    window.addEventListener('resize', clampText);
-
     function goToSlide(n) {
       slides[currentSlide].classList.remove('active');
       currentSlide = (n + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
       if (counter) counter.textContent = (currentSlide + 1) + ' / ' + slides.length;
       resetAutoplay();
-      setTimeout(clampText, 50);
     }
 
     prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
