@@ -543,24 +543,48 @@
 
     /* ===== TESTIMONIALS ===== */
     .testimonials-section {
-      padding: 140px 40px;
+      position: relative;
+      padding: 100px 40px;
       overflow: hidden;
+      background: url('testimonials-bg.jpg') center center / cover no-repeat;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(51, 51, 51, 0.3);
+      z-index: 0;
     }
 
     .testimonials-inner {
-      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      width: 100%;
       margin: 0 auto;
       text-align: center;
     }
 
+    .testimonial-card {
+      background: rgba(251, 244, 232, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 4px;
+      padding: 56px 52px 48px;
+    }
+
     .testimonials-eyebrow {
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--grey);
-      margin-bottom: 80px;
+      font-family: var(--font-heading);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--purple);
+      margin-bottom: 28px;
     }
 
     .testimonial-slider {
@@ -578,59 +602,63 @@
       opacity: 1;
     }
 
-    .testimonial-quote {
-      font-size: 3rem;
-      color: var(--purple);
-      font-family: Georgia, serif;
-      line-height: 1;
-      margin-bottom: 24px;
-      opacity: 0.4;
+    .testimonial-text {
+      font-family: var(--font-body);
+      font-size: clamp(0.9rem, 1.4vw, 1rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--black);
+      margin-bottom: 28px;
+      max-height: 200px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .testimonial-text {
-      font-family: var(--font-heading);
-      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--black);
-      margin-bottom: 32px;
-      font-style: italic;
+    .testimonial-text.clamped::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, rgba(251, 244, 232, 0.95));
+      pointer-events: none;
     }
 
     .testimonial-author {
       font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--grey);
     }
 
-    .slider-controls {
+    .slider-nav {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 32px;
-      margin-top: 48px;
+      gap: 40px;
+      margin-top: 36px;
     }
 
     .slider-btn {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      border: 1px solid var(--light-grey);
+      border: 1px solid rgba(255,255,255,0.4);
       background: transparent;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
-      color: var(--grey);
+      color: var(--white);
     }
 
     .slider-btn:hover {
-      border-color: var(--black);
-      color: var(--black);
+      border-color: var(--white);
+      background: rgba(255,255,255,0.1);
     }
 
     .slider-btn svg {
@@ -638,33 +666,11 @@
       height: 18px;
     }
 
-    .slider-dots {
-      display: flex;
-      gap: 10px;
-    }
-
-    .slider-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--light-grey);
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      padding: 0;
-    }
-
-    .slider-dot.active {
-      background: var(--purple);
-      transform: scale(1.2);
-    }
-
     .slider-counter {
       font-family: var(--font-body);
       font-size: 0.8rem;
       font-weight: 300;
-      color: var(--grey);
-      margin-top: 20px;
+      color: rgba(255,255,255,0.7);
     }
 
     /* ===== CONTACT ===== */
@@ -1201,11 +1207,12 @@
         gap: 40px;
       }
 
-      .testimonials-section { padding: 100px 24px; }
+      .testimonials-section { padding: 60px 20px; min-height: 500px; }
+      .testimonial-card { padding: 40px 28px 36px; }
+      .testimonial-text { max-height: 180px; }
 
-      .slider-dots { gap: 8px; }
       .slider-btn { width: 40px; height: 40px; }
-      .slider-controls { gap: 20px; }
+      .slider-nav { gap: 24px; }
 
       .contact-section { padding: 100px 24px; }
       .contact-inner {
@@ -1221,13 +1228,7 @@
       .hero-title { font-size: 2.5rem; }
       .results-grid { grid-template-columns: 1fr; gap: 48px; }
       .result-number { font-size: 3rem; }
-      .slider-dots { display: none; }
-      .slider-counter { display: block; }
       .form-submit { width: 100%; }
-    }
-
-    @media (min-width: 601px) {
-      .slider-counter { display: none; }
     }
   </style>
 </head>
@@ -1348,77 +1349,61 @@
   <!-- TESTIMONIALS -->
   <section class="testimonials-section" id="testimonials">
     <div class="testimonials-inner">
-      <p class="testimonials-eyebrow reveal">Client Love</p>
+      <div class="testimonial-card reveal">
+        <p class="testimonials-eyebrow">Client Love</p>
 
-      <div class="testimonial-slider reveal" id="testimonialSlider">
-        <div class="testimonial active" data-slide="0">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!</p>
-          <p class="testimonial-author">Jonather Warner, Optimatic</p>
-        </div>
+        <div class="testimonial-slider" id="testimonialSlider">
+          <div class="testimonial active" data-slide="0">
+            <p class="testimonial-text">Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented — the kind of person who catches the tiny things that make a big difference — and she plans everything well ahead so we're never scrambling at the last minute. What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results — our email performance has consistently improved under her management, from engagement metrics to actual conversions. If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!</p>
+            <p class="testimonial-author">Jonather Warner — Optimatic</p>
+          </div>
 
-        <div class="testimonial" data-slide="1">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough.</p>
-          <p class="testimonial-author">Mark Quinn, Perfectly Snug</p>
-        </div>
+          <div class="testimonial" data-slide="1">
+            <p class="testimonial-text">Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable. What really sets Amanda apart is her strategic mindset — she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates. Most importantly, Amanda truly "gets" our brand. I can't recommend Amanda highly enough.</p>
+            <p class="testimonial-author">Mark Quinn — Perfectly Snug</p>
+          </div>
 
-        <div class="testimonial" data-slide="2">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team.</p>
-          <p class="testimonial-author">Nicole Vincze and Tyler Clemmer, Rec Fitness Owners</p>
-        </div>
+          <div class="testimonial" data-slide="2">
+            <p class="testimonial-text">Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business. Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners. We can't recommend Amanda enough.</p>
+            <p class="testimonial-author">Nicole Vincze &amp; Tyler Clemmer — Rec Fitness</p>
+          </div>
 
-        <div class="testimonial" data-slide="3">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way.</p>
-          <p class="testimonial-author">Mika Sirett, Rec Fitness Manager</p>
-        </div>
+          <div class="testimonial" data-slide="3">
+            <p class="testimonial-text">We honestly couldn't ask for a better marketing partner!! Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable. She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way.</p>
+            <p class="testimonial-author">Mika Sirett — Rec Fitness</p>
+          </div>
 
-        <div class="testimonial" data-slide="4">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly.</p>
-          <p class="testimonial-author">Luigi Coccaro, Franco's Liquor Store</p>
-        </div>
+          <div class="testimonial" data-slide="4">
+            <p class="testimonial-text">Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point. I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable. Anyone considering working with you should know they're in excellent hands.</p>
+            <p class="testimonial-author">Luigi Coccaro — Franco's Liquor Store</p>
+          </div>
 
-        <div class="testimonial" data-slide="5">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers.</p>
-          <p class="testimonial-author">Jesse East, YLW Realtors</p>
-        </div>
+          <div class="testimonial" data-slide="5">
+            <p class="testimonial-text">We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results. Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers.</p>
+            <p class="testimonial-author">Jesse East — YLW Realtors</p>
+          </div>
 
-        <div class="testimonial" data-slide="6">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!</p>
-          <p class="testimonial-author">Mikayla Pankratz-Oranchuk, MIK Marketing</p>
-        </div>
+          <div class="testimonial" data-slide="6">
+            <p class="testimonial-text">Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!</p>
+            <p class="testimonial-author">Mikayla Pankratz-Oranchuk — MIK Marketing</p>
+          </div>
 
-        <div class="testimonial" data-slide="7">
-          <div class="testimonial-quote">"</div>
-          <p class="testimonial-text">Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!</p>
-          <p class="testimonial-author">Greg Johnson, Voltscore</p>
+          <div class="testimonial" data-slide="7">
+            <p class="testimonial-text">Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do. When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase. The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!</p>
+            <p class="testimonial-author">Greg Johnson — Voltscore</p>
+          </div>
         </div>
       </div>
 
-      <div class="slider-controls">
+      <div class="slider-nav">
         <button class="slider-btn" id="sliderPrev" aria-label="Previous testimonial">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
         </button>
-        <div class="slider-dots" id="sliderDots">
-          <button class="slider-dot active" data-dot="0" aria-label="Testimonial 1"></button>
-          <button class="slider-dot" data-dot="1" aria-label="Testimonial 2"></button>
-          <button class="slider-dot" data-dot="2" aria-label="Testimonial 3"></button>
-          <button class="slider-dot" data-dot="3" aria-label="Testimonial 4"></button>
-          <button class="slider-dot" data-dot="4" aria-label="Testimonial 5"></button>
-          <button class="slider-dot" data-dot="5" aria-label="Testimonial 6"></button>
-          <button class="slider-dot" data-dot="6" aria-label="Testimonial 7"></button>
-          <button class="slider-dot" data-dot="7" aria-label="Testimonial 8"></button>
-        </div>
+        <p class="slider-counter" id="sliderCounter">1 / 8</p>
         <button class="slider-btn" id="sliderNext" aria-label="Next testimonial">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
         </button>
       </div>
-      <p class="slider-counter" id="sliderCounter">1 / 8</p>
     </div>
   </section>
 
@@ -1667,28 +1652,31 @@
 
     // Testimonial slider
     const slides = document.querySelectorAll('.testimonial');
-    const dots = document.querySelectorAll('.slider-dot');
     const prevBtn = document.getElementById('sliderPrev');
     const nextBtn = document.getElementById('sliderNext');
     const counter = document.getElementById('sliderCounter');
     let currentSlide = 0;
     let autoplayTimer;
 
+    function clampText() {
+      document.querySelectorAll('.testimonial-text').forEach(el => {
+        el.classList.toggle('clamped', el.scrollHeight > el.clientHeight);
+      });
+    }
+    clampText();
+    window.addEventListener('resize', clampText);
+
     function goToSlide(n) {
       slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
       currentSlide = (n + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
       if (counter) counter.textContent = (currentSlide + 1) + ' / ' + slides.length;
       resetAutoplay();
+      setTimeout(clampText, 50);
     }
 
     prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
     nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-    dots.forEach(dot => {
-      dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.dot)));
-    });
 
     // Keyboard navigation for slider
     document.addEventListener('keydown', (e) => {
