@@ -8,23 +8,51 @@
   <link rel="icon" type="image/jpeg" href="favicon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
+    /* ===== FONTS ===== */
+    @font-face {
+      font-family: 'Mackinac';
+      src: url('fonts/MackinacBook.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Mackinac';
+      src: url('fonts/MackinacMedium.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Mackinac';
+      src: url('fonts/MackinacBold.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Mackinac';
+      src: url('fonts/MackinacExtraBold.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --color-bg: #FBF4E8;
-      --color-text: #333333;
-      --color-text-light: #666666;
-      --color-accent: #A084CA;
-      --color-accent-hover: #8a6db5;
-      --color-border: #e5e0d5;
-      --color-card-bg: #FFFFFF;
-      --color-hero-bg: #FBF4E8;
-      --color-green: #D0CF8B;
-      --font-heading: 'Lora', Georgia, serif;
-      --font-subheading: 'Inter', -apple-system, sans-serif;
+      --cream: #FBF4E8;
+      --black: #333333;
+      --purple: #A084CA;
+      --purple-hover: #8a6db5;
+      --green: #D0CF8B;
+      --grey: #999999;
+      --light-grey: #e5e0d5;
+      --white: #FFFFFF;
+      --font-heading: 'Mackinac', Georgia, serif;
       --font-body: 'DM Sans', -apple-system, sans-serif;
     }
 
@@ -32,674 +60,797 @@
 
     body {
       font-family: var(--font-body);
-      background: var(--color-bg);
-      color: var(--color-text);
+      background: var(--cream);
+      color: var(--black);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    /* ===== UTILITIES ===== */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .section {
-      padding: 100px 0;
-    }
-
-    .section-label {
-      font-family: var(--font-subheading);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-text-light);
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 500;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    /* ===== NAV ===== */
-    .nav {
+    /* ===== TOP BAR ===== */
+    .topbar {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(251, 244, 232, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--color-border);
-      transition: all 0.3s ease;
-    }
-
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 70px;
+      padding: 20px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      transition: all 0.4s ease;
     }
 
-    .nav-logo {
-      font-family: var(--font-heading);
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+    .topbar.scrolled {
+      background: rgba(251, 244, 232, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 40px;
     }
 
-    .nav-links {
+    .topbar-logo img {
+      height: 36px;
+      transition: height 0.3s ease;
+    }
+
+    .topbar-right {
       display: flex;
-      gap: 36px;
-      list-style: none;
+      align-items: center;
+      gap: 32px;
     }
 
-    .nav-links a {
-      font-size: 0.875rem;
+    .topbar-link {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
       font-weight: 400;
-      color: var(--color-text-light);
+      color: var(--grey);
+      letter-spacing: 0.03em;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--color-text); }
+    .topbar-link:hover { color: var(--black); }
 
-    .nav-cta {
-      font-size: 0.875rem;
+    .topbar-cta {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
       font-weight: 500;
-      color: var(--color-card-bg) !important;
-      background: var(--color-accent);
-      padding: 10px 24px;
+      color: var(--white);
+      background: var(--purple);
+      padding: 10px 28px;
       border-radius: 100px;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
 
-    .nav-cta:hover { background: var(--color-accent-hover); }
-
-    .nav-mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .nav-mobile-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--color-text);
-      margin: 5px 0;
-      transition: all 0.3s;
+    .topbar-cta:hover {
+      background: var(--purple-hover);
+      transform: translateY(-1px);
     }
 
     /* ===== HERO ===== */
     .hero {
-      padding: 160px 0 120px;
-      background: var(--color-hero-bg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
     }
 
-    .hero-label {
+    .hero-eyebrow {
+      font-family: var(--font-body);
       font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
+      font-weight: 400;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--color-green);
-      margin-bottom: 28px;
+      color: var(--green);
+      margin-bottom: 40px;
     }
 
     .hero-title {
       font-family: var(--font-heading);
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(3rem, 8vw, 6.5rem);
       font-weight: 500;
-      line-height: 1.1;
-      max-width: 750px;
-      margin: 0 auto 28px;
-      letter-spacing: -0.02em;
+      line-height: 1.05;
+      max-width: 900px;
+      letter-spacing: -0.03em;
+      margin-bottom: 36px;
     }
 
     .hero-subtitle {
-      font-size: 1.125rem;
-      color: var(--color-text-light);
-      max-width: 580px;
-      margin: 0 auto 44px;
-      line-height: 1.7;
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 300;
+      color: var(--grey);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 48px;
     }
 
-    .btn {
+    .hero-cta {
       display: inline-block;
       font-family: var(--font-body);
       font-size: 0.9rem;
       font-weight: 500;
-      padding: 14px 36px;
+      color: var(--white);
+      background: var(--purple);
+      padding: 16px 44px;
       border-radius: 100px;
-      border: none;
-      cursor: pointer;
       transition: all 0.25s ease;
     }
 
-    .btn-primary {
-      background: var(--color-accent);
-      color: #fff;
+    .hero-cta:hover {
+      background: var(--purple-hover);
+      transform: translateY(-2px);
     }
 
-    .btn-primary:hover {
-      background: var(--color-accent-hover);
-      transform: translateY(-1px);
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--grey);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--color-text);
-      border: 1.5px solid var(--color-border);
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: var(--light-grey);
+      animation: scrollPulse 2s ease-in-out infinite;
     }
 
-    .btn-outline:hover {
-      border-color: var(--color-text);
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 140px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--light-grey);
+      margin: 0 auto 60px;
     }
 
     /* ===== SERVICES ===== */
     .services {
-      background: var(--color-bg);
+      text-align: center;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 60px;
-    }
-
-    .service-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 40px 32px;
-      transition: all 0.3s ease;
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
-      border-color: var(--color-green);
-    }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      background: rgba(208, 207, 139, 0.25);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .services-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
       margin-bottom: 24px;
-      font-size: 1.25rem;
     }
 
-    .service-card h3 {
+    .services-title {
       font-family: var(--font-heading);
-      font-size: 1.35rem;
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 500;
-      margin-bottom: 14px;
+      line-height: 1.15;
+      margin-bottom: 80px;
+      letter-spacing: -0.02em;
     }
 
-    .service-card p {
-      font-size: 0.925rem;
-      color: var(--color-text-light);
-      line-height: 1.7;
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .service-item {
+      padding: 48px 0;
+      border-top: 1px solid var(--light-grey);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      text-align: left;
+      align-items: center;
+    }
+
+    .service-item:last-child {
+      border-bottom: 1px solid var(--light-grey);
+    }
+
+    .service-name {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .service-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.8;
     }
 
     /* ===== ABOUT ===== */
-    .about {
-      background: #FFFFFF;
+    .about-section {
+      padding: 140px 40px;
+      background: var(--white);
     }
 
-    .about-grid {
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      grid-template-columns: 5fr 6fr;
+      gap: 100px;
       align-items: center;
     }
 
     .about-image {
-      border-radius: 16px;
-      overflow: hidden;
-      aspect-ratio: 4/5;
-      background: var(--color-border);
+      position: relative;
     }
 
     .about-image img {
       width: 100%;
-      height: 100%;
+      border-radius: 4px;
+      aspect-ratio: 3/4;
       object-fit: cover;
+    }
+
+    .about-text .about-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 24px;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 36px;
+      letter-spacing: -0.02em;
     }
 
     .about-text p {
       font-size: 1rem;
-      color: var(--color-text-light);
-      line-height: 1.8;
-      margin-bottom: 20px;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.9;
+      margin-bottom: 24px;
     }
 
-    .about-text .btn {
-      margin-top: 16px;
+    .about-text p:last-of-type {
+      margin-bottom: 40px;
+    }
+
+    .about-cta {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--black);
+      border-bottom: 1.5px solid var(--black);
+      padding-bottom: 4px;
+      transition: all 0.2s;
+    }
+
+    .about-cta:hover {
+      color: var(--purple);
+      border-color: var(--purple);
     }
 
     /* ===== RESULTS ===== */
-    .results {
-      background: #333333;
-      color: #fff;
+    .results-section {
+      padding: 140px 40px;
+      background: var(--black);
+      color: var(--white);
     }
 
-    .results .section-label { color: rgba(255,255,255,0.5); }
-    .results .section-title { color: #fff; }
+    .results-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .results-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 80px;
+    }
 
     .results-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      margin-top: 60px;
+      gap: 24px;
     }
 
-    .result-card {
-      text-align: center;
-      padding: 40px 24px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
+    .result-item {
+      padding: 20px;
     }
 
     .result-number {
       font-family: var(--font-heading);
-      font-size: 3rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--color-green);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 500;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 16px;
     }
 
     .result-label {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.5;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
     }
 
-    /* ===== REVIEWS ===== */
-    .reviews {
-      background: var(--color-bg);
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-section {
+      padding: 140px 40px;
     }
 
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      margin-top: 60px;
+    .testimonials-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .review-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 36px;
+    .testimonials-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 80px;
     }
 
-    .review-stars {
-      color: var(--color-green);
-      font-size: 1rem;
-      margin-bottom: 16px;
-      letter-spacing: 2px;
+    .testimonial {
+      margin-bottom: 80px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid var(--light-grey);
     }
 
-    .review-text {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--color-text);
-      margin-bottom: 20px;
+    .testimonial:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .testimonial-text {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--black);
+      margin-bottom: 32px;
       font-style: italic;
     }
 
-    .review-author {
-      font-size: 0.825rem;
-      font-weight: 600;
-      color: var(--color-text-light);
+    .testimonial-author {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey);
     }
 
     /* ===== CONTACT ===== */
-    .contact {
-      background: #FFFFFF;
+    .contact-section {
+      padding: 140px 40px;
+      background: var(--white);
     }
 
-    .contact-grid {
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 100px;
       align-items: start;
     }
 
-    .contact-info h3 {
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      margin-bottom: 12px;
+    .contact-left .contact-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 24px;
     }
 
-    .contact-info p {
-      font-size: 0.95rem;
-      color: var(--color-text-light);
-      line-height: 1.7;
-      margin-bottom: 32px;
+    .contact-left h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-left > p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.8;
+      margin-bottom: 48px;
     }
 
     .contact-details {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
     }
 
     .contact-details li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.925rem;
-      color: var(--color-text-light);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--grey);
     }
 
-    .contact-details li svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      color: var(--color-text);
+    .contact-details a {
+      color: var(--black);
+      border-bottom: 1px solid var(--light-grey);
+      padding-bottom: 2px;
+      transition: all 0.2s;
     }
 
-    .contact-details a:hover { color: var(--color-text); }
+    .contact-details a:hover {
+      color: var(--purple);
+      border-color: var(--purple);
+    }
 
     .contact-social {
       display: flex;
       gap: 16px;
-      margin-top: 32px;
+      margin-top: 40px;
     }
 
     .contact-social a {
       width: 40px;
       height: 40px;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--light-grey);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
+      color: var(--grey);
     }
 
     .contact-social a:hover {
-      background: var(--color-green);
-      border-color: var(--color-green);
-      color: #333;
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--black);
     }
 
-    .contact-social svg {
-      width: 18px;
-      height: 18px;
+    .contact-social svg { width: 16px; height: 16px; }
+
+    /* Form */
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
 
-    .contact-form {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
-      padding: 40px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
+    .form-field label {
       display: block;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--color-text-light);
-      margin-bottom: 8px;
+      color: var(--grey);
+      margin-bottom: 10px;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .form-field input,
+    .form-field textarea {
       width: 100%;
-      padding: 14px 16px;
+      padding: 16px 0;
       font-family: var(--font-body);
-      font-size: 0.925rem;
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-      background: var(--color-bg);
-      color: var(--color-text);
-      transition: border-color 0.2s;
+      font-size: 1rem;
+      font-weight: 300;
+      border: none;
+      border-bottom: 1px solid var(--light-grey);
+      background: transparent;
+      color: var(--black);
       outline: none;
+      transition: border-color 0.3s;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--color-accent);
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--purple);
     }
 
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
+    .form-field textarea {
+      resize: none;
+      min-height: 100px;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--light-grey);
+      font-weight: 300;
     }
 
     .form-submit {
-      width: 100%;
-      padding: 16px;
+      align-self: flex-start;
       font-family: var(--font-body);
-      font-size: 0.925rem;
+      font-size: 0.9rem;
       font-weight: 500;
-      background: var(--color-accent);
-      color: #fff;
-      border: none;
+      color: var(--white);
+      background: var(--purple);
+      padding: 16px 44px;
       border-radius: 100px;
+      border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.25s ease;
+      margin-top: 16px;
     }
 
-    .form-submit:hover { background: var(--color-accent-hover); }
+    .form-submit:hover {
+      background: var(--purple-hover);
+      transform: translateY(-1px);
+    }
 
     .form-success {
       display: none;
-      text-align: center;
-      padding: 40px 20px;
+      padding: 60px 0;
     }
 
     .form-success h3 {
       font-family: var(--font-heading);
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 12px;
     }
 
     .form-success p {
-      color: var(--color-text-light);
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--grey);
     }
 
     /* ===== FOOTER ===== */
     .footer {
-      background: #333333;
-      color: rgba(255,255,255,0.5);
-      padding: 40px 0;
+      padding: 40px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--grey);
+      letter-spacing: 0.05em;
     }
 
-    .footer a { color: rgba(255,255,255,0.7); }
-    .footer a:hover { color: #fff; }
+    .footer a {
+      color: var(--grey);
+      border-bottom: 1px solid var(--light-grey);
+      padding-bottom: 1px;
+      transition: all 0.2s;
+    }
+
+    .footer a:hover {
+      color: var(--black);
+      border-color: var(--black);
+    }
 
     /* ===== ANIMATIONS ===== */
-    .fade-in {
+    .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .fade-in.visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ===== MOBILE NAV ===== */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 101;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--black);
+      margin: 6px 0;
+      transition: all 0.3s;
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .services-grid {
+      .topbar { padding: 16px 24px; }
+      .topbar.scrolled { padding: 12px 24px; }
+
+      .topbar-right .topbar-link { display: none; }
+      .mobile-toggle { display: block; }
+
+      .topbar-right.open {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--cream);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+        z-index: 100;
+      }
+
+      .topbar-right.open .topbar-link {
+        display: block;
+        font-size: 1.5rem;
+      }
+
+      .hero { padding: 120px 24px 80px; min-height: 90vh; }
+      .section { padding: 100px 24px; }
+
+      .service-item {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        gap: 16px;
+        padding: 36px 0;
       }
 
-      .results-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .about-grid,
-      .contact-grid {
+      .about-section { padding: 100px 24px; }
+      .about-inner {
         grid-template-columns: 1fr;
         gap: 48px;
       }
 
       .about-image { max-width: 400px; }
 
-      .reviews-grid {
+      .results-section { padding: 100px 24px; }
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .testimonials-section { padding: 100px 24px; }
+
+      .contact-section { padding: 100px 24px; }
+      .contact-inner {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        gap: 60px;
       }
-
-      .nav-links { display: none; }
-      .nav-mobile-toggle { display: block; }
-
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        background: rgba(250, 250, 248, 0.98);
-        backdrop-filter: blur(20px);
-        padding: 24px;
-        gap: 20px;
-        border-bottom: 1px solid var(--color-border);
-      }
-
-      .hero { padding: 130px 0 80px; }
-      .section { padding: 72px 0; }
     }
 
     @media (max-width: 600px) {
-      .hero-title { font-size: 2.2rem; }
-      .contact-form { padding: 28px; }
-      .result-number { font-size: 2.25rem; }
+      .hero-title { font-size: 2.5rem; }
+      .results-grid { grid-template-columns: 1fr; gap: 48px; }
+      .result-number { font-size: 3rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo"><img src="logo.jpg" alt="Matty Marketing" style="height:40px;"></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
-      </ul>
-      <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <!-- TOP BAR -->
+  <nav class="topbar" id="topbar">
+    <a href="#" class="topbar-logo">
+      <img src="logo-small.jpg" alt="Matty Marketing">
+    </a>
+    <div class="topbar-right" id="topbarRight">
+      <a href="#services" class="topbar-link">Services</a>
+      <a href="#about" class="topbar-link">About</a>
+      <a href="#results" class="topbar-link">Results</a>
+      <a href="#testimonials" class="topbar-link">Testimonials</a>
+      <a href="#contact" class="topbar-cta">Get In Touch</a>
     </div>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <p class="hero-label">Matty Marketing</p>
-      <h1 class="hero-title">Full-service email marketing. From strategy to send.</h1>
-      <p class="hero-subtitle">Email and SMS management, high-converting landing pages, and custom website builds for brands ready to grow.</p>
-      <a href="#contact" class="btn btn-primary">Work With Me</a>
+    <p class="hero-eyebrow reveal">Matty Marketing</p>
+    <h1 class="hero-title reveal reveal-delay-1">From strategy<br>to send.</h1>
+    <p class="hero-subtitle reveal reveal-delay-2">Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.</p>
+    <a href="#contact" class="hero-cta reveal reveal-delay-3">Work With Me</a>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section class="services section" id="services">
-    <div class="container">
-      <p class="section-label fade-in">What I Do</p>
-      <h2 class="section-title fade-in">Services built to grow your brand.</h2>
-      <div class="services-grid">
-        <div class="service-card fade-in">
-          <div class="service-icon">📧</div>
-          <h3>Email & SMS Marketing</h3>
-          <p>Full Klaviyo account management from strategy to execution. Campaigns, automated flows, segmentation, A/B testing, and reporting. Everything it takes to turn your email list into your most profitable channel.</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">🌐</div>
-          <h3>Website Builds</h3>
-          <p>Clean, conversion-focused websites designed to reflect your brand and drive results. From full site builds to page-by-page redesigns, tailored to your business.</p>
-        </div>
-        <div class="service-card fade-in">
-          <div class="service-icon">🚀</div>
-          <h3>Landing Pages</h3>
-          <p>High-converting landing pages designed to turn traffic into customers. Built in Replo, Shopify, or standalone, with strategy and design that actually performs.</p>
-        </div>
+  <section class="section services" id="services">
+    <p class="services-eyebrow reveal">What I Do</p>
+    <h2 class="services-title reveal">Services built to<br>grow your brand.</h2>
+    <div class="services-list">
+      <div class="service-item reveal">
+        <h3 class="service-name">Email & SMS Marketing</h3>
+        <p class="service-desc">Full Klaviyo account management from strategy to execution. Campaigns, automated flows, segmentation, A/B testing, and reporting. Everything it takes to turn your email list into your most profitable channel.</p>
+      </div>
+      <div class="service-item reveal">
+        <h3 class="service-name">Website Builds</h3>
+        <p class="service-desc">Clean, conversion-focused websites designed to reflect your brand and drive results. From full site builds to page-by-page redesigns, tailored to your business.</p>
+      </div>
+      <div class="service-item reveal">
+        <h3 class="service-name">Landing Pages</h3>
+        <p class="service-desc">High-converting landing pages designed to turn traffic into customers. Built in Replo, Shopify, or standalone, with strategy and design that actually performs.</p>
       </div>
     </div>
   </section>
 
   <!-- ABOUT -->
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-image fade-in">
-          <img src="headshot.jpg" alt="Amanda McLaughlin, founder of Matty Marketing">
-        </div>
-        <div class="about-text fade-in">
-          <p class="section-label">About</p>
-          <h2 class="section-title">Hi, I'm Amanda.</h2>
-          <p>I started my career in the D2C space, helping ecommerce brands build from the ground up to six-figure run rates. That's where I fell in love with email marketing. I saw what most businesses were missing: emails aren't just messages, they're mini websites that build connection, drive sales, and keep customers coming back.</p>
-          <p>After almost a decade in the industry, earning my Business Management diploma from BCIT, and completing my degree with a marketing focus in Kelowna, I launched Matty Marketing to help brands get more from every send. Today, I manage full email and SMS programs, build websites, and create landing pages that actually convert.</p>
-          <p>The name Matty Marketing is personal. It's named after my older brother Matt, who passed away in 2013. He pushed me toward business, and his handwriting from his mechanic books is in the logo. Every project carries a little bit of that energy.</p>
-          <a href="#contact" class="btn btn-primary">Let's Talk</a>
-        </div>
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-image reveal">
+        <img src="headshot.jpg" alt="Amanda McLaughlin, founder of Matty Marketing">
+      </div>
+      <div class="about-text">
+        <p class="about-eyebrow reveal">About</p>
+        <h2 class="reveal">Hi, I'm Amanda.</h2>
+        <p class="reveal">I started my career in the D2C space, helping ecommerce brands build from the ground up to six-figure run rates. That's where I fell in love with email marketing. I saw what most businesses were missing: emails aren't just messages, they're mini websites that build connection, drive sales, and keep customers coming back.</p>
+        <p class="reveal">After almost a decade in the industry, earning my Business Management diploma from BCIT, and completing my degree with a marketing focus in Kelowna, I launched Matty Marketing to help brands get more from every send. Today, I manage full email and SMS programs, build websites, and create landing pages that actually convert.</p>
+        <p class="reveal">The name Matty Marketing is personal. It's named after my older brother Matt, who passed away in 2013. He pushed me toward business, and his handwriting from his mechanic books is in the logo. Every project carries a little bit of that energy.</p>
+        <a href="#contact" class="about-cta reveal">Let's Talk →</a>
       </div>
     </div>
   </section>
 
   <!-- RESULTS -->
-  <section class="results section" id="results">
-    <div class="container">
-      <p class="section-label fade-in">Results</p>
-      <h2 class="section-title fade-in">The numbers speak for themselves.</h2>
+  <section class="results-section" id="results">
+    <div class="results-inner">
+      <p class="results-eyebrow reveal">Results</p>
       <div class="results-grid">
-        <div class="result-card fade-in">
+        <div class="result-item reveal">
           <div class="result-number">$1.7M+</div>
           <div class="result-label">Email & SMS revenue<br>generated for clients</div>
         </div>
-        <div class="result-card fade-in">
+        <div class="result-item reveal reveal-delay-1">
           <div class="result-number">$1.4M</div>
           <div class="result-label">Driven by automated flows<br>that work while you sleep</div>
         </div>
-        <div class="result-card fade-in">
-          <div class="result-number">60-83%</div>
+        <div class="result-item reveal reveal-delay-2">
+          <div class="result-number">60–83%</div>
           <div class="result-label">Average open rates<br>(industry avg is 20%)</div>
         </div>
-        <div class="result-card fade-in">
+        <div class="result-item reveal reveal-delay-3">
           <div class="result-number">200+</div>
           <div class="result-label">Campaigns managed<br>across multiple industries</div>
         </div>
@@ -707,105 +858,90 @@
     </div>
   </section>
 
-  <!-- REVIEWS -->
-  <section class="reviews section" id="reviews">
-    <div class="container">
-      <p class="section-label fade-in">Client Love</p>
-      <h2 class="section-title fade-in">What people are saying.</h2>
-      <div class="reviews-grid">
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!"</p>
-          <p class="review-author">— Jonather Warner, Optimatic</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough."</p>
-          <p class="review-author">— Mark Quinn, Perfectly Snug</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team."</p>
-          <p class="review-author">— Nicole Vincze and Tyler Clemmer, Rec Fitness Owners</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way."</p>
-          <p class="review-author">— Mika Sirett, Rec Fitness Manager</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly."</p>
-          <p class="review-author">— Luigi Coccaro, Franco's Liquor Store</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers."</p>
-          <p class="review-author">— Jesse East, YLW Realtors</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!"</p>
-          <p class="review-author">— Mikayla Pankratz-Oranchuk, MIK Marketing</p>
-        </div>
-        <div class="review-card fade-in">
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!"</p>
-          <p class="review-author">— Greg Johnson, Voltscore</p>
-        </div>
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="testimonials-inner">
+      <p class="testimonials-eyebrow reveal">Client Love</p>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!"</p>
+        <p class="testimonial-author">Jonather Warner, Optimatic</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough."</p>
+        <p class="testimonial-author">Mark Quinn, Perfectly Snug</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team."</p>
+        <p class="testimonial-author">Nicole Vincze and Tyler Clemmer, Rec Fitness Owners</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way."</p>
+        <p class="testimonial-author">Mika Sirett, Rec Fitness Manager</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly."</p>
+        <p class="testimonial-author">Luigi Coccaro, Franco's Liquor Store</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers."</p>
+        <p class="testimonial-author">Jesse East, YLW Realtors</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!"</p>
+        <p class="testimonial-author">Mikayla Pankratz-Oranchuk, MIK Marketing</p>
+      </div>
+
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!"</p>
+        <p class="testimonial-author">Greg Johnson, Voltscore</p>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="contact section" id="contact">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info fade-in">
-          <p class="section-label">Get In Touch</p>
-          <h2 class="section-title">Let's grow your brand together.</h2>
-          <p>Whether you're starting from scratch or looking to level up your existing email program, I'd love to hear about your project.</p>
-          <ul class="contact-details">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
-              <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
-              <a href="tel:+12502156446">(250) 215-6446</a>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
-              Kelowna, BC, Canada
-            </li>
-          </ul>
-          <div class="contact-social">
-            <a href="https://www.instagram.com/mattymarketingg" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-          </div>
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <p class="contact-eyebrow reveal">Get In Touch</p>
+        <h2 class="reveal">Let's grow your brand together.</h2>
+        <p class="reveal">Whether you're starting from scratch or looking to level up your existing email program, I'd love to hear about your project.</p>
+        <ul class="contact-details reveal">
+          <li><a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></li>
+          <li><a href="tel:+12502156446">(250) 215-6446</a></li>
+          <li>Kelowna, BC, Canada</li>
+        </ul>
+        <div class="contact-social reveal">
+          <a href="https://www.instagram.com/mattymarketingg" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
         </div>
-
-        <div class="contact-form fade-in" id="contactFormWrapper">
-          <form id="contactForm" action="https://formspree.io/f/xjgawdaq" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required placeholder="Your name">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="you@company.com">
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
-            </div>
-            <button type="submit" class="form-submit">Send Message</button>
-          </form>
-          <div class="form-success" id="formSuccess">
-            <h3>Thank you!</h3>
-            <p>I'll get back to you within 24 hours.</p>
+      </div>
+      <div class="contact-form" id="contactFormWrapper">
+        <form id="contactForm" action="https://formspree.io/f/xjgawdaq" method="POST">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
           </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="you@company.com">
+          </div>
+          <div class="form-field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <h3>Thank you.</h3>
+          <p>I'll get back to you within 24 hours.</p>
         </div>
       </div>
     </div>
@@ -813,39 +949,38 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Matty Marketing. All rights reserved. &nbsp;|&nbsp; Kelowna, BC &nbsp;|&nbsp; <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></p>
-    </div>
+    <p>&copy; 2026 Matty Marketing &nbsp;&middot;&nbsp; Kelowna, BC &nbsp;&middot;&nbsp; <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></p>
   </footer>
 
   <script>
-    // Mobile nav toggle
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+    // Topbar scroll effect
+    const topbar = document.getElementById('topbar');
+    window.addEventListener('scroll', () => {
+      topbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile nav
+    const mobileToggle = document.getElementById('mobileToggle');
+    const topbarRight = document.getElementById('topbarRight');
+    mobileToggle.addEventListener('click', () => {
+      topbarRight.classList.toggle('open');
     });
 
     // Close mobile nav on link click
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    topbarRight.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => topbarRight.classList.remove('open'));
     });
 
-    // Mobile nav open background
-    const mobileNavStyle = document.createElement('style');
-    mobileNavStyle.textContent = `.nav-links.open { background: rgba(251, 244, 232, 0.98); }`;
-    document.head.appendChild(mobileNavStyle);
-
-    // Scroll fade-in
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // Form submission
     const form = document.getElementById('contactForm');
@@ -864,7 +999,6 @@
           success.style.display = 'block';
         }
       } catch (err) {
-        // Fallback: open mailto
         const name = data.get('name');
         const email = data.get('email');
         const message = data.get('message');
