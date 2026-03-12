@@ -5,24 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Matty Marketing | Full-Service Email Marketing</title>
   <meta name="description" content="Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.">
+  <link rel="icon" type="image/jpeg" href="favicon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --color-bg: #FAFAF8;
-      --color-text: #1a1a1a;
-      --color-text-light: #6b6b6b;
-      --color-accent: #2c2c2c;
-      --color-accent-hover: #000;
-      --color-border: #e5e5e0;
-      --color-card-bg: #ffffff;
-      --color-hero-bg: #f0efeb;
-      --font-heading: 'Playfair Display', Georgia, serif;
-      --font-body: 'Inter', -apple-system, sans-serif;
+      --color-bg: #FBF4E8;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-accent: #A084CA;
+      --color-accent-hover: #8a6db5;
+      --color-border: #e5e0d5;
+      --color-card-bg: #FFFFFF;
+      --color-hero-bg: #FBF4E8;
+      --color-green: #D0CF8B;
+      --font-heading: 'Lora', Georgia, serif;
+      --font-subheading: 'Inter', -apple-system, sans-serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -50,7 +53,7 @@
     }
 
     .section-label {
-      font-family: var(--font-body);
+      font-family: var(--font-subheading);
       font-size: 0.75rem;
       font-weight: 600;
       letter-spacing: 0.15em;
@@ -74,7 +77,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      background: rgba(250, 250, 248, 0.9);
+      background: rgba(251, 244, 232, 0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--color-border);
@@ -154,7 +157,7 @@
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--color-text-light);
+      color: var(--color-green);
       margin-bottom: 28px;
     }
 
@@ -232,12 +235,13 @@
     .service-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+      border-color: var(--color-green);
     }
 
     .service-icon {
       width: 48px;
       height: 48px;
-      background: var(--color-hero-bg);
+      background: rgba(208, 207, 139, 0.25);
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -261,7 +265,7 @@
 
     /* ===== ABOUT ===== */
     .about {
-      background: var(--color-hero-bg);
+      background: #FFFFFF;
     }
 
     .about-grid {
@@ -297,7 +301,7 @@
 
     /* ===== RESULTS ===== */
     .results {
-      background: var(--color-accent);
+      background: #333333;
       color: #fff;
     }
 
@@ -306,7 +310,7 @@
 
     .results-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 32px;
       margin-top: 60px;
     }
@@ -323,6 +327,7 @@
       font-size: 3rem;
       font-weight: 600;
       margin-bottom: 8px;
+      color: var(--color-green);
     }
 
     .result-label {
@@ -351,7 +356,7 @@
     }
 
     .review-stars {
-      color: #f4b942;
+      color: var(--color-green);
       font-size: 1rem;
       margin-bottom: 16px;
       letter-spacing: 2px;
@@ -373,7 +378,7 @@
 
     /* ===== CONTACT ===== */
     .contact {
-      background: var(--color-hero-bg);
+      background: #FFFFFF;
     }
 
     .contact-grid {
@@ -438,9 +443,9 @@
     }
 
     .contact-social a:hover {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: #fff;
+      background: var(--color-green);
+      border-color: var(--color-green);
+      color: #333;
     }
 
     .contact-social svg {
@@ -485,7 +490,7 @@
 
     .form-group input:focus,
     .form-group textarea:focus {
-      border-color: var(--color-text);
+      border-color: var(--color-accent);
     }
 
     .form-group textarea {
@@ -528,7 +533,7 @@
 
     /* ===== FOOTER ===== */
     .footer {
-      background: var(--color-accent);
+      background: #333333;
       color: rgba(255,255,255,0.5);
       padding: 40px 0;
       text-align: center;
@@ -552,10 +557,13 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .services-grid,
-      .results-grid {
+      .services-grid {
         grid-template-columns: 1fr;
         max-width: 500px;
+      }
+
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
       .about-grid,
@@ -604,7 +612,7 @@
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">Matty Marketing</a>
+      <a href="#" class="nav-logo"><img src="logo.jpg" alt="Matty Marketing" style="height:40px;"></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
@@ -659,16 +667,14 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-image fade-in">
-          <!-- REPLACE: Add your headshot here -->
-          <!-- <img src="headshot.jpg" alt="Amanda McLaughlin"> -->
-          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-text-light);font-size:0.875rem;">Your photo here</div>
+          <img src="headshot.jpg" alt="Amanda McLaughlin, founder of Matty Marketing">
         </div>
         <div class="about-text fade-in">
           <p class="section-label">About</p>
           <h2 class="section-title">Hi, I'm Amanda.</h2>
-          <p>I'm the founder of Matty Marketing, a full-service email marketing agency based in Kelowna, BC. I help brands build email and SMS programs that actually drive revenue, not just fill inboxes.</p>
-          <p>With nearly a decade of experience in marketing and a deep specialization in Klaviyo, I've helped ecommerce and service-based brands turn their email lists into their highest-performing sales channels. I manage everything from strategy and copywriting to design, automation, and reporting.</p>
-          <p>When I'm not in Klaviyo, I'm building websites and landing pages that convert. I believe great marketing should feel effortless to your customers and drive real, measurable results for your business.</p>
+          <p>I started my career in the D2C space, helping ecommerce brands build from the ground up to six-figure run rates. That's where I fell in love with email marketing. I saw what most businesses were missing: emails aren't just messages, they're mini websites that build connection, drive sales, and keep customers coming back.</p>
+          <p>After almost a decade in the industry, earning my Business Management diploma from BCIT, and completing my degree with a marketing focus in Kelowna, I launched Matty Marketing to help brands get more from every send. Today, I manage full email and SMS programs, build websites, and create landing pages that actually convert.</p>
+          <p>The name Matty Marketing is personal. It's named after my older brother Matt, who passed away in 2013. He pushed me toward business, and his handwriting from his mechanic books is in the logo. Every project carries a little bit of that energy.</p>
           <a href="#contact" class="btn btn-primary">Let's Talk</a>
         </div>
       </div>
@@ -682,16 +688,20 @@
       <h2 class="section-title fade-in">The numbers speak for themselves.</h2>
       <div class="results-grid">
         <div class="result-card fade-in">
-          <div class="result-number">$1.59M</div>
-          <div class="result-label">Email & SMS revenue generated<br>for a single client in 12 months</div>
+          <div class="result-number">$1.7M+</div>
+          <div class="result-label">Email & SMS revenue<br>generated for clients</div>
         </div>
         <div class="result-card fade-in">
-          <div class="result-number">50%+</div>
-          <div class="result-label">Average open rates achieved<br>(up from 14%)</div>
+          <div class="result-number">$1.4M</div>
+          <div class="result-label">Driven by automated flows<br>that work while you sleep</div>
         </div>
         <div class="result-card fade-in">
-          <div class="result-number">5+</div>
-          <div class="result-label">Years of dedicated<br>email marketing expertise</div>
+          <div class="result-number">60-83%</div>
+          <div class="result-label">Average open rates<br>(industry avg is 20%)</div>
+        </div>
+        <div class="result-card fade-in">
+          <div class="result-number">200+</div>
+          <div class="result-label">Campaigns managed<br>across multiple industries</div>
         </div>
       </div>
     </div>
@@ -703,16 +713,45 @@
       <p class="section-label fade-in">Client Love</p>
       <h2 class="section-title fade-in">What people are saying.</h2>
       <div class="reviews-grid">
-        <!-- REPLACE: Add real client reviews here -->
         <div class="review-card fade-in">
           <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Your review will go here. Send your client testimonials and I'll drop them in."</p>
-          <p class="review-author">— Client Name</p>
+          <p class="review-text">"Amanda has been a total asset to our email marketing efforts. She's incredibly detail-oriented—the kind of person who catches the tiny things that make a big difference—and she plans everything well ahead so we're never scrambling at the last minute.<br><br>What I appreciate most is how strategic she is. Amanda doesn't just send emails; she thinks about how each campaign fits into the bigger picture and what we're trying to accomplish. The proof is in the results—our email performance has consistently improved under her management, from engagement metrics to actual conversions.<br><br>If you need someone who's both meticulous and strategic, who actually moves the needle on performance, Amanda's your person. Can't recommend her enough!"</p>
+          <p class="review-author">— Jonather Warner, Optimatic</p>
         </div>
         <div class="review-card fade-in">
           <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Another review will go here. The more specific the testimonial, the better it converts."</p>
-          <p class="review-author">— Client Name</p>
+          <p class="review-text">"Working with Amanda has been outstanding from day one. Her positive attitude and collaborative approach make every project smooth and enjoyable.<br><br>What really sets Amanda apart is her strategic mindset—she's constantly testing and refining our email and SMS campaigns to improve results, never settling for "good enough." The landing pages she builds are exceptional, and her copywriting is some of the best I've encountered. She has a deep understanding of consumer psychology and the sales process, which shows in everything she creates.<br><br>Most importantly, Amanda truly "gets" our brand. She's been instrumental in helping us connect with our customers on an emotional level through relatable, compelling content that drives real engagement. Whether it's our email campaigns, SMS marketing, or landing pages, the work consistently delivers. I can't recommend Amanda highly enough."</p>
+          <p class="review-author">— Mark Quinn, Perfectly Snug</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Amanda built our website for REC Fitness and made the entire process incredibly easy from start to finish. She was professional, efficient, and extremely responsive, and she delivered everything faster than we expected without sacrificing quality. She took the time to understand our brand and vision, and the final result truly reflects who we are as a business.<br><br>Beyond the website, Amanda also helps run our social media pages, and her support there has been just as valuable. She's creative, reliable, and proactive, which takes a huge weight off our shoulders as business owners.<br><br>If you're looking for someone who is easy to work with, highly skilled, and genuinely invested in your success, we can't recommend Amanda enough. We're incredibly grateful to have her as part of our team."</p>
+          <p class="review-author">— Nicole Vincze and Tyler Clemmer, Rec Fitness Owners</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We honestly couldn't ask for a better marketing partner!!<br><br>Working with her has been a true game changer for our gym. She is incredibly helpful, patient, and genuinely hands on, guiding us through every step of the email and social media marketing process in a way that feels supportive and approachable.<br><br>She takes the time to truly understand our gym, our values, and our brand voice, and it shows. Her ideas are thoughtful and creative &amp; she has elevated our social media presence and the overall experience for our members. We feel supported, confident, and so grateful for her care, creativity, and constant support every step of the way."</p>
+          <p class="review-author">— Mika Sirett, Rec Fitness Manager</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Working together has been a game changer for me. You turn things around incredibly quickly, and every time the work comes back it's exactly what I had in mind (often even better). You have a great ability to listen, interpret, and then execute in a way that feels thoughtful, creative, and on point.<br><br>I really value your honest feedback — you don't just say yes to everything, you offer ideas, guidance, and constructive input that actually improves the end result. That balance of creativity, professionalism, and clarity is rare, and it makes the whole process seamless and enjoyable.<br><br>Anyone considering working with you should know they're in excellent hands. I couldn't recommend you more highly."</p>
+          <p class="review-author">— Luigi Coccaro, Franco's Liquor Store</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We hired Amanda for email marketing and to update our website almost a year ago and have been really happy with the results.<br><br>Beyond the results, the communication was great — we always knew what was happening and felt like a priority. She's always responsive, data-driven, and genuinely felt like a partner. Highly recommend if you're looking for a team that actually delivers."</p>
+          <p class="review-author">— Jesse East, YLW Realtors</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Right from the start Amanda is professional, friendly and easy to work with. Her insight and knowledge regarding email marketing and website design/flows are evident in her results. Clear communication and always providing avenues for creativity and moving the needle for clients. I highly recommend Amanda if your business is looking to amplify your email marketing results!"</p>
+          <p class="review-author">— Mikayla Pankratz-Oranchuk, MIK Marketing</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Amanda is fantastic to work with. She's efficient, communicates clearly, and always follows through on what she says she'll do.<br><br>When something has a tight deadline, I know she'll prioritize it appropriately and keep things moving without me having to chase.<br><br>The work she delivers is consistently high quality and thoughtfully executed, so I can trust that once it's in her hands, it will get done and it will be done well!"</p>
+          <p class="review-author">— Greg Johnson, Voltscore</p>
         </div>
       </div>
     </div>
@@ -791,6 +830,11 @@
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
+
+    // Mobile nav open background
+    const mobileNavStyle = document.createElement('style');
+    mobileNavStyle.textContent = `.nav-links.open { background: rgba(251, 244, 232, 0.98); }`;
+    document.head.appendChild(mobileNavStyle);
 
     // Scroll fade-in
     const observer = new IntersectionObserver((entries) => {
