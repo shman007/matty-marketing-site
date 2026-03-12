@@ -261,6 +261,26 @@
       box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
     }
 
+    .hero-cta-secondary {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--black);
+      background: transparent;
+      padding: 14px 36px;
+      border-radius: 100px;
+      border: 1.5px solid var(--black);
+      transition: all 0.25s ease;
+      margin-top: 12px;
+    }
+
+    .hero-cta-secondary:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      transform: translateY(-2px);
+    }
+
     .hero-scroll {
       position: absolute;
       bottom: 40px;
@@ -449,6 +469,26 @@
       background: var(--purple-hover);
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
+    }
+
+    .about-cta-secondary {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--black);
+      background: transparent;
+      padding: 12px 32px;
+      border-radius: 100px;
+      border: 1.5px solid var(--light-grey);
+      transition: all 0.25s ease;
+      margin-left: 16px;
+    }
+
+    .about-cta-secondary:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+      transform: translateY(-1px);
     }
 
     /* ===== RESULTS ===== */
@@ -847,6 +887,120 @@
       color: var(--grey);
     }
 
+    /* ===== FAQ ===== */
+    .faq-section {
+      padding: 140px 40px;
+      background: var(--white);
+    }
+
+    .faq-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .faq-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 64px;
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .faq-item {
+      border-top: 1px solid var(--light-grey);
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--light-grey);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--black);
+      transition: color 0.2s;
+      gap: 24px;
+    }
+
+    .faq-question:hover {
+      color: var(--purple);
+    }
+
+    .faq-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--grey);
+      transition: transform 0.3s ease, color 0.2s;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--purple);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 28px;
+    }
+
+    .faq-answer p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--grey);
+      line-height: 1.8;
+    }
+
+    .faq-answer a {
+      color: var(--purple);
+      font-weight: 400;
+      border-bottom: 1px solid rgba(160, 132, 202, 0.3);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+
+    .faq-answer a:hover {
+      border-color: var(--purple);
+    }
+
+    @media (max-width: 900px) {
+      .faq-section { padding: 100px 24px; }
+    }
+
     /* ===== BACK TO TOP ===== */
     .back-to-top {
       position: fixed;
@@ -1035,6 +1189,11 @@
         max-width: 400px;
       }
 
+      .about-cta-secondary {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+
       .results-section { padding: 100px 24px; }
       .results-grid {
         grid-template-columns: 1fr 1fr;
@@ -1086,7 +1245,8 @@
       <a href="#about" class="topbar-link" data-section="about">About</a>
       <a href="#results" class="topbar-link" data-section="results">Results</a>
       <a href="#testimonials" class="topbar-link" data-section="testimonials">Testimonials</a>
-      <a href="#contact" class="topbar-cta">Get In Touch</a>
+      <a href="#faq" class="topbar-link" data-section="faq">FAQ</a>
+      <a href="#contact" class="topbar-cta">Join the Waitlist</a>
     </div>
     <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
       <span></span>
@@ -1101,7 +1261,8 @@
     <a href="#about">About</a>
     <a href="#results">Results</a>
     <a href="#testimonials">Testimonials</a>
-    <a href="#contact" class="topbar-cta">Get In Touch</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="topbar-cta">Join the Waitlist</a>
   </div>
 
   <!-- HERO -->
@@ -1109,7 +1270,8 @@
     <p class="hero-eyebrow reveal">Matty Marketing</p>
     <h1 class="hero-title reveal reveal-delay-1">From strategy<br>to send.</h1>
     <p class="hero-subtitle reveal reveal-delay-2">Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.</p>
-    <a href="#contact" class="hero-cta reveal reveal-delay-3">Work With Me</a>
+    <a href="#contact" class="hero-cta reveal reveal-delay-3">Join the Waitlist</a>
+    <a href="https://calendly.com/amandahoeschlemarketing/30min" target="_blank" rel="noopener" class="hero-cta-secondary reveal reveal-delay-3">Book a Discovery Call</a>
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
     </div>
@@ -1147,7 +1309,8 @@
         <p class="reveal">I started my career in the D2C space, helping ecommerce brands build from the ground up to six-figure run rates. That's where I fell in love with email marketing. I saw what most businesses were missing: emails aren't just messages, they're mini websites that build connection, drive sales, and keep customers coming back.</p>
         <p class="reveal">After almost a decade in the industry, earning my Business Management diploma from BCIT, and completing my degree with a marketing focus in Kelowna, I launched Matty Marketing to help brands get more from every send. Today, I manage full email and SMS programs, build websites, and create landing pages that actually convert.</p>
         <p class="reveal">The name Matty Marketing is personal. It's named after my older brother Matt, who passed away in 2013. He pushed me toward business, and his handwriting from his mechanic books is in the logo. Every project carries a little bit of that energy.</p>
-        <a href="#contact" class="about-cta reveal">Let's Talk</a>
+        <a href="#contact" class="about-cta reveal">Join the Waitlist</a>
+        <a href="https://calendly.com/amandahoeschlemarketing/30min" target="_blank" rel="noopener" class="about-cta-secondary reveal">Book a Discovery Call</a>
       </div>
     </div>
   </section>
@@ -1254,15 +1417,97 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="faq-inner">
+      <p class="faq-eyebrow reveal">Common Questions</p>
+      <h2 class="faq-title reveal">Before you ask.</h2>
+      <div class="faq-list">
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>What platforms do you work with?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Klaviyo is my go-to for email and SMS marketing. For websites, I build on Wix and Shopify. Landing pages are typically built in Replo or directly in Shopify. If you're on a different platform, let's chat and figure out the best path forward.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>How much does this cost?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Pricing depends on the scope of the project, the number of deliverables, and how much ongoing management is involved. Every business is different, so I tailor packages to fit. <a href="https://calendly.com/amandahoeschlemarketing/30min" target="_blank" rel="noopener">Book a discovery call</a> and we can figure out what makes sense for you.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>What's the typical timeline to see results?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>The first month is dedicated to research, strategy, and building out your content. Emails typically start going out in month two. Most clients start seeing meaningful improvements in open rates, click rates, and revenue within the first 60 to 90 days.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>Do you work with non-ecommerce brands?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. While ecommerce is my specialty, I also work with service-based businesses, fitness brands, and real estate professionals. If email is part of your growth strategy, we can make it work.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>I already have an email setup. Can you work with what I have?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely. I'll audit what you've got, identify what's working and what's not, and build a plan to optimize from there. You don't need to start from scratch to see a big difference.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>What does the working relationship look like?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>I work on a monthly retainer so you get consistent, dedicated attention. You'll get regular reporting, strategy recommendations, and direct access to me. Think of it less like hiring an agency and more like adding a marketing partner to your team.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal">
+          <button class="faq-question" aria-expanded="false">
+            <span>How many clients do you take on at a time?</span>
+            <svg class="faq-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+          </button>
+          <div class="faq-answer">
+            <p>I intentionally keep my client roster small. Quality matters more than quantity, and every brand I work with gets my full focus. That's why there's a waitlist. If I'm at capacity, I'll let you know the timeline so you can plan ahead.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="contact-section" id="contact">
     <div class="contact-inner">
       <div class="contact-left">
-        <p class="contact-eyebrow reveal">Get In Touch</p>
+        <p class="contact-eyebrow reveal">Get On The List</p>
         <h2 class="reveal">Let's grow your brand together.</h2>
-        <p class="reveal">Whether you're starting from scratch or looking to level up your existing email program, I'd love to hear about your project.</p>
+        <p class="reveal">I take on a limited number of clients to keep the work personal and the results exceptional. Join the waitlist or book a discovery call to get started.</p>
         <ul class="contact-details reveal">
-          <li><a href="mailto:amanda@mattymarketing.com" class="contact-cta-btn">amanda@mattymarketing.com</a></li>
+          <li><a href="https://calendly.com/amandahoeschlemarketing/30min" target="_blank" rel="noopener" class="contact-cta-btn">Book a Discovery Call</a></li>
+          <li><a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></li>
           <li><a href="tel:+12502156446">(250) 215-6446</a></li>
           <li>Kelowna, BC, Canada</li>
         </ul>
@@ -1469,6 +1714,19 @@
       const diff = touchStartX - e.changedTouches[0].screenX;
       if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
     }, { passive: true });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) item.classList.add('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+      });
+    });
 
     // Form submission with loading state
     const form = document.getElementById('contactForm');
