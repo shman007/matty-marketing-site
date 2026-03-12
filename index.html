@@ -1068,6 +1068,55 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+    // Count-up animation for results
+    const resultNumbers = document.querySelectorAll('.result-number');
+    let countStarted = false;
+
+    function animateCount(el) {
+      const text = el.textContent.trim();
+      const prefix = text.match(/^[^0-9]*/)[0];
+      const suffix = text.match(/[^0-9%]*$/)[0];
+      const numStr = text.replace(prefix, '').replace(suffix, '').replace(/,/g, '');
+      const hasPercent = numStr.includes('%');
+      const cleanNum = parseFloat(numStr.replace('%', '').replace('–', ''));
+      const dashPart = numStr.includes('–') ? numStr.split('–')[0] + '–' : '';
+      const targetNum = numStr.includes('–') ? parseFloat(numStr.split('–')[1]) : cleanNum;
+      const isDecimal = numStr.includes('.');
+      const duration = 2000;
+      const steps = 60;
+      const increment = targetNum / steps;
+      let current = 0;
+      let step = 0;
+
+      const timer = setInterval(() => {
+        step++;
+        current = Math.min(targetNum, (targetNum * (1 - Math.pow(1 - step / steps, 3))));
+        let display = isDecimal ? current.toFixed(0) : Math.floor(current);
+        if (targetNum >= 1000) {
+          display = Math.floor(current).toLocaleString();
+        }
+        el.textContent = prefix + dashPart + display + (hasPercent ? '%' : '') + suffix;
+        if (step >= steps) {
+          el.textContent = text;
+          clearInterval(timer);
+        }
+      }, duration / steps);
+    }
+
+    const resultsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !countStarted) {
+          countStarted = true;
+          resultNumbers.forEach((el, i) => {
+            setTimeout(() => animateCount(el), i * 150);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const resultsSection = document.querySelector('.results-section');
+    if (resultsSection) resultsObserver.observe(resultsSection);
+
     // Testimonial slider
     const slides = document.querySelectorAll('.testimonial');
     const dots = document.querySelectorAll('.slider-dot');
