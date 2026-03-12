@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matty Marketing | Full-Service Email Marketing</title>
+  <meta name="description" content="Full-service email and SMS marketing, high-converting landing pages, and custom website builds for brands ready to grow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-bg: #FAFAF8;
+      --color-text: #1a1a1a;
+      --color-text-light: #6b6b6b;
+      --color-accent: #2c2c2c;
+      --color-accent-hover: #000;
+      --color-border: #e5e5e0;
+      --color-card-bg: #ffffff;
+      --color-hero-bg: #f0efeb;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== UTILITIES ===== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--color-text-light);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--color-text); }
+
+    .nav-cta {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-card-bg) !important;
+      background: var(--color-accent);
+      padding: 10px 24px;
+      border-radius: 100px;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--color-accent-hover); }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text);
+      margin: 5px 0;
+      transition: all 0.3s;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 160px 0 120px;
+      background: var(--color-hero-bg);
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      max-width: 750px;
+      margin: 0 auto 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--color-text-light);
+      max-width: 580px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 14px 36px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border: 1.5px solid var(--color-border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-text);
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      background: var(--color-bg);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .service-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-hero-bg);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 1.25rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .service-card p {
+      font-size: 0.925rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--color-hero-bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: var(--color-border);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--color-text-light);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-text .btn {
+      margin-top: 16px;
+    }
+
+    /* ===== RESULTS ===== */
+    .results {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .results .section-label { color: rgba(255,255,255,0.5); }
+    .results .section-title { color: #fff; }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .result-card {
+      text-align: center;
+      padding: 40px 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+    }
+
+    .result-number {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .result-label {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    /* ===== REVIEWS ===== */
+    .reviews {
+      background: var(--color-bg);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .review-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 36px;
+    }
+
+    .review-stars {
+      color: #f4b942;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--color-text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .review-author {
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--color-text-light);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: var(--color-hero-bg);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-info p {
+      font-size: 0.95rem;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .contact-details {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-details li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.925rem;
+      color: var(--color-text-light);
+    }
+
+    .contact-details li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--color-text);
+    }
+
+    .contact-details a:hover { color: var(--color-text); }
+
+    .contact-social {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .contact-social a {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .contact-social a:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: #fff;
+    }
+
+    .contact-social svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .contact-form {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text-light);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 0.925rem;
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-text);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      font-family: var(--font-body);
+      font-size: 0.925rem;
+      font-weight: 500;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .form-submit:hover { background: var(--color-accent-hover); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .form-success h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-accent);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 0;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+
+    .footer a { color: rgba(255,255,255,0.7); }
+    .footer a:hover { color: #fff; }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .services-grid,
+      .results-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .about-image { max-width: 400px; }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
+      .nav-links { display: none; }
+      .nav-mobile-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(250, 250, 248, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .hero { padding: 130px 0 80px; }
+      .section { padding: 72px 0; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.2rem; }
+      .contact-form { padding: 28px; }
+      .result-number { font-size: 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Matty Marketing</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-label">Matty Marketing</p>
+      <h1 class="hero-title">Full-service email marketing. From strategy to send.</h1>
+      <p class="hero-subtitle">Email and SMS management, high-converting landing pages, and custom website builds for brands ready to grow.</p>
+      <a href="#contact" class="btn btn-primary">Work With Me</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section" id="services">
+    <div class="container">
+      <p class="section-label fade-in">What I Do</p>
+      <h2 class="section-title fade-in">Services built to grow your brand.</h2>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-icon">📧</div>
+          <h3>Email & SMS Marketing</h3>
+          <p>Full Klaviyo account management from strategy to execution. Campaigns, automated flows, segmentation, A/B testing, and reporting. Everything it takes to turn your email list into your most profitable channel.</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🌐</div>
+          <h3>Website Builds</h3>
+          <p>Clean, conversion-focused websites designed to reflect your brand and drive results. From full site builds to page-by-page redesigns, tailored to your business.</p>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-icon">🚀</div>
+          <h3>Landing Pages</h3>
+          <p>High-converting landing pages designed to turn traffic into customers. Built in Replo, Shopify, or standalone, with strategy and design that actually performs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image fade-in">
+          <!-- REPLACE: Add your headshot here -->
+          <!-- <img src="headshot.jpg" alt="Amanda McLaughlin"> -->
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--color-text-light);font-size:0.875rem;">Your photo here</div>
+        </div>
+        <div class="about-text fade-in">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Hi, I'm Amanda.</h2>
+          <p>I'm the founder of Matty Marketing, a full-service email marketing agency based in Kelowna, BC. I help brands build email and SMS programs that actually drive revenue, not just fill inboxes.</p>
+          <p>With nearly a decade of experience in marketing and a deep specialization in Klaviyo, I've helped ecommerce and service-based brands turn their email lists into their highest-performing sales channels. I manage everything from strategy and copywriting to design, automation, and reporting.</p>
+          <p>When I'm not in Klaviyo, I'm building websites and landing pages that convert. I believe great marketing should feel effortless to your customers and drive real, measurable results for your business.</p>
+          <a href="#contact" class="btn btn-primary">Let's Talk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="results section" id="results">
+    <div class="container">
+      <p class="section-label fade-in">Results</p>
+      <h2 class="section-title fade-in">The numbers speak for themselves.</h2>
+      <div class="results-grid">
+        <div class="result-card fade-in">
+          <div class="result-number">$1.59M</div>
+          <div class="result-label">Email & SMS revenue generated<br>for a single client in 12 months</div>
+        </div>
+        <div class="result-card fade-in">
+          <div class="result-number">50%+</div>
+          <div class="result-label">Average open rates achieved<br>(up from 14%)</div>
+        </div>
+        <div class="result-card fade-in">
+          <div class="result-number">5+</div>
+          <div class="result-label">Years of dedicated<br>email marketing expertise</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews section" id="reviews">
+    <div class="container">
+      <p class="section-label fade-in">Client Love</p>
+      <h2 class="section-title fade-in">What people are saying.</h2>
+      <div class="reviews-grid">
+        <!-- REPLACE: Add real client reviews here -->
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Your review will go here. Send your client testimonials and I'll drop them in."</p>
+          <p class="review-author">— Client Name</p>
+        </div>
+        <div class="review-card fade-in">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Another review will go here. The more specific the testimonial, the better it converts."</p>
+          <p class="review-author">— Client Name</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Let's grow your brand together.</h2>
+          <p>Whether you're starting from scratch or looking to level up your existing email program, I'd love to hear about your project.</p>
+          <ul class="contact-details">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+              <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+              <a href="tel:+12502156446">(250) 215-6446</a>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+              Kelowna, BC, Canada
+            </li>
+          </ul>
+          <div class="contact-social">
+            <a href="https://www.instagram.com/mattymarketingg" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-form fade-in" id="contactFormWrapper">
+          <form id="contactForm" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@company.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message</button>
+          </form>
+          <div class="form-success" id="formSuccess">
+            <h3>Thank you!</h3>
+            <p>I'll get back to you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Matty Marketing. All rights reserved. &nbsp;|&nbsp; Kelowna, BC &nbsp;|&nbsp; <a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Form submission
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('formSuccess');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.style.display = 'none';
+          success.style.display = 'block';
+        }
+      } catch (err) {
+        // Fallback: open mailto
+        const name = data.get('name');
+        const email = data.get('email');
+        const message = data.get('message');
+        window.location.href = `mailto:amanda@mattymarketing.com?subject=Website Inquiry from ${name}&body=${encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')')}`;
+      }
+    });
+  </script>
+
+</body>
+</html>
