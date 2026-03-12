@@ -436,17 +436,19 @@
     .about-cta {
       display: inline-block;
       font-family: var(--font-body);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 500;
-      color: var(--black);
-      border-bottom: 1.5px solid var(--black);
-      padding-bottom: 4px;
-      transition: all 0.2s;
+      color: var(--white);
+      background: var(--purple);
+      padding: 14px 36px;
+      border-radius: 100px;
+      transition: all 0.25s ease;
     }
 
     .about-cta:hover {
-      color: var(--purple);
-      border-color: var(--purple);
+      background: var(--purple-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
     }
 
     /* ===== RESULTS ===== */
@@ -681,7 +683,8 @@
 
     .contact-details a {
       color: var(--black);
-      border-bottom: 1px solid var(--light-grey);
+      font-weight: 400;
+      border-bottom: 1.5px solid var(--light-grey);
       padding-bottom: 2px;
       transition: all 0.2s;
     }
@@ -689,6 +692,25 @@
     .contact-details a:hover {
       color: var(--purple);
       border-color: var(--purple);
+    }
+
+    .contact-details .contact-cta-btn {
+      display: inline-block;
+      color: var(--white);
+      background: var(--purple);
+      padding: 12px 32px;
+      border-radius: 100px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      margin-top: 8px;
+    }
+
+    .contact-details .contact-cta-btn:hover {
+      background: var(--purple-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 30px rgba(160, 132, 202, 0.3);
     }
 
     .contact-social {
@@ -1125,7 +1147,7 @@
         <p class="reveal">I started my career in the D2C space, helping ecommerce brands build from the ground up to six-figure run rates. That's where I fell in love with email marketing. I saw what most businesses were missing: emails aren't just messages, they're mini websites that build connection, drive sales, and keep customers coming back.</p>
         <p class="reveal">After almost a decade in the industry, earning my Business Management diploma from BCIT, and completing my degree with a marketing focus in Kelowna, I launched Matty Marketing to help brands get more from every send. Today, I manage full email and SMS programs, build websites, and create landing pages that actually convert.</p>
         <p class="reveal">The name Matty Marketing is personal. It's named after my older brother Matt, who passed away in 2013. He pushed me toward business, and his handwriting from his mechanic books is in the logo. Every project carries a little bit of that energy.</p>
-        <a href="#contact" class="about-cta reveal">Let's Talk →</a>
+        <a href="#contact" class="about-cta reveal">Let's Talk</a>
       </div>
     </div>
   </section>
@@ -1240,7 +1262,7 @@
         <h2 class="reveal">Let's grow your brand together.</h2>
         <p class="reveal">Whether you're starting from scratch or looking to level up your existing email program, I'd love to hear about your project.</p>
         <ul class="contact-details reveal">
-          <li><a href="mailto:amanda@mattymarketing.com">amanda@mattymarketing.com</a></li>
+          <li><a href="mailto:amanda@mattymarketing.com" class="contact-cta-btn">amanda@mattymarketing.com</a></li>
           <li><a href="tel:+12502156446">(250) 215-6446</a></li>
           <li>Kelowna, BC, Canada</li>
         </ul>
