@@ -104,7 +104,7 @@
       --font-body: 'DM Sans', -apple-system, sans-serif;
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
 
     body {
       font-family: var(--font-body);
@@ -112,7 +112,7 @@
       color: var(--black);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      min-height: 0;
     }
 
     /* Page load fade-in */
@@ -1219,7 +1219,7 @@
       .topbar-right { display: none; }
       .mobile-toggle { display: block; }
 
-      .hero { padding: 120px 24px 80px; min-height: 90vh; background-size: cover; }
+      .hero { padding: 120px 24px 80px; min-height: auto; background-size: cover; }
       .hero-eyebrow { margin-bottom: 8px; }
       .section { padding: 100px 24px; }
 
