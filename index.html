@@ -1167,6 +1167,20 @@
       opacity: 1;
     }
 
+    .mobile-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 2.5rem;
+      color: var(--black);
+      cursor: pointer;
+      line-height: 1;
+      padding: 8px;
+      z-index: 160;
+    }
+
     .mobile-overlay a {
       font-family: var(--font-heading);
       font-size: 2rem;
@@ -1277,6 +1291,7 @@
 
   <!-- Mobile Overlay -->
   <div class="mobile-overlay" id="mobileOverlay">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">&times;</button>
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#results">Results</a>
@@ -1606,12 +1621,23 @@
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileOverlay = document.getElementById('mobileOverlay');
 
+    const mobileClose = document.getElementById('mobileClose');
+
+    function closeMobileMenu() {
+      mobileOverlay.classList.remove('open');
+      mobileToggle.classList.remove('active');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
     mobileToggle.addEventListener('click', () => {
       const isOpen = mobileOverlay.classList.toggle('open');
       mobileToggle.classList.toggle('active');
       mobileToggle.setAttribute('aria-expanded', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
+
+    mobileClose.addEventListener('click', closeMobileMenu);
 
     // Close mobile nav on link click
     mobileOverlay.querySelectorAll('a').forEach(link => {
