@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shman007.github.io/matty-marketing-site/sitemap.xml
+Sitemap: https://mattymarketing.com/sitemap.xml
