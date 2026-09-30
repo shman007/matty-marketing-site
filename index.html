@@ -1033,6 +1033,60 @@
       border-color: var(--purple);
     }
 
+    /* BRAND MARQUEE */
+    .brands {
+      background: var(--cream);
+      padding: 48px 0;
+      border-bottom: 1px solid var(--light-grey);
+      overflow: hidden;
+    }
+    .brands-eyebrow {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 28px;
+    }
+    .brands-viewport {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+              mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+    }
+    .brands-track {
+      display: flex;
+      width: max-content;
+      animation: brands-scroll 60s linear infinite;
+    }
+    .brands-viewport:hover .brands-track { animation-play-state: paused; }
+    .brands-group {
+      display: flex;
+      align-items: center;
+      gap: 72px;
+      padding-right: 72px;
+    }
+    .brand-item {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--black);
+      opacity: 0.55;
+      white-space: nowrap;
+    }
+    @keyframes brands-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .brands-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+      .brands-group[aria-hidden="true"] { display: none; }
+    }
+    @media (max-width: 600px) {
+      .brands { padding: 36px 0; }
+      .brand-item { font-size: 1.25rem; }
+      .brands-group { gap: 48px; padding-right: 48px; }
+    }
+
     @media (max-width: 900px) {
       .faq-section { padding: 40px 24px; }
     }
@@ -1328,6 +1382,41 @@
     <a href="https://calendly.com/amandahoeschlemarketing/30min" target="_blank" rel="noopener" class="hero-cta-secondary reveal reveal-delay-3">Book a Discovery Call</a>
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section class="brands" aria-label="Brands I've worked with">
+    <p class="brands-eyebrow">Brands I've worked with</p>
+    <div class="brands-viewport">
+      <div class="brands-track">
+        <div class="brands-group">
+        <span class="brand-item">Perfectly Snug</span>
+        <span class="brand-item">Dove Dental</span>
+        <span class="brand-item">Three Ships</span>
+        <span class="brand-item">Sundays</span>
+        <span class="brand-item">Hetta</span>
+        <span class="brand-item">REC Fitness</span>
+        <span class="brand-item">YLW Realtors</span>
+        <span class="brand-item">Franco&rsquo;s Liquor Store</span>
+        <span class="brand-item">Curious Cafe</span>
+        <span class="brand-item">Reggie</span>
+        <span class="brand-item">Weiss Excavating &amp; Contracting</span>
+        </div>
+        <div class="brands-group" aria-hidden="true">
+        <span class="brand-item">Perfectly Snug</span>
+        <span class="brand-item">Dove Dental</span>
+        <span class="brand-item">Three Ships</span>
+        <span class="brand-item">Sundays</span>
+        <span class="brand-item">Hetta</span>
+        <span class="brand-item">REC Fitness</span>
+        <span class="brand-item">YLW Realtors</span>
+        <span class="brand-item">Franco&rsquo;s Liquor Store</span>
+        <span class="brand-item">Curious Cafe</span>
+        <span class="brand-item">Reggie</span>
+        <span class="brand-item">Weiss Excavating &amp; Contracting</span>
+        </div>
+      </div>
     </div>
   </section>
 
